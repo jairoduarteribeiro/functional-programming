@@ -16,6 +16,9 @@ console.log(sum(1, 2, 3))
 console.log(sum(1, 2, 3, 4, 5, 6))
 console.log(sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
 
+const sub = (a, b) => a - b
+console.log(sub(4, 1))
+
 const power = base => exp => Math.pow(base, exp)
 console.log(power(2)(10))
 
