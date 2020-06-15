@@ -1,16 +1,16 @@
 // Function declaration
-function bomDia() {
-  console.log('Bom dia!')
+function goodMorning() {
+  console.log('Good morning!')
 }
 
-bomDia()
+goodMorning()
 
 // Function expression
-const boaTarde = function () {
-  console.log('Boa tarde!')
+const goodAfternoon = function () {
+  console.log('Good afternoon!')
 }
 
-boaTarde()
+goodAfternoon()
 
 // Parameters
 function sum(a = 0, b = 0) {
