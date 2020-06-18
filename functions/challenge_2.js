@@ -9,8 +9,16 @@ const shoppingCart = [
 const average = shoppingCart
   .filter(product => product.fragile)
   .map(product => product.amount * product.price)
-  .reduce((accumulator, current, _, array) => {
-    return accumulator + current / array.length
-  }, 0) // TODO: verify if it's correct.
+  .reduce((accumulator, current) => {
+    const newAmount = accumulator.amount + 1
+    const newTotal = accumulator.total + current
+
+    return {
+      amount: newAmount,
+      total: newTotal,
+      average: newTotal / newAmount
+    }
+  }, { amount: 0, total: 0, average: 0 })
+  .average
 
 console.log(average)
