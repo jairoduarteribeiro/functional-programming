@@ -6,19 +6,24 @@ const shoppingCart = [
   { name: 'Tesoura', amount: 1, price: 19.20, fragile: true }
 ]
 
-const average = shoppingCart
-  .filter(product => product.fragile)
-  .map(product => product.amount * product.price)
-  .reduce((accumulator, current) => {
-    const newAmount = accumulator.amount + 1
-    const newTotal = accumulator.total + current
+const isFragile = product => product.fragile
+const getTotal = product => product.amount * product.price
+const getAverage = (accumulator, current) => {
+  const newAmount = accumulator.amount + 1
+  const newTotal = accumulator.total + current
 
-    return {
-      amount: newAmount,
-      total: newTotal,
-      average: newTotal / newAmount
-    }
-  }, { amount: 0, total: 0, average: 0 })
+  return {
+    amount: newAmount,
+    total: newTotal,
+    average: newTotal / newAmount
+  }
+}
+const initialAverage = { amount: 0, total: 0, average: 0 }
+
+const average = shoppingCart
+  .filter(isFragile)
+  .map(getTotal)
+  .reduce(getAverage, initialAverage)
   .average
 
 console.log(average)
