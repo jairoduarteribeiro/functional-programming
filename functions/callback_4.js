@@ -7,8 +7,10 @@ const shoppingCart = [
 ]
 
 const amountGreaterThanZero = product => product.amount > 0
+const getName = product => product.name
 
-const validProducts = shoppingCart
+const namesValidProducts = shoppingCart
   .filter(amountGreaterThanZero)
+  .map(getName)
 
-console.log(validProducts)
+console.log(namesValidProducts)
