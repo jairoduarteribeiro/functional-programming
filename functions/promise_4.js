@@ -24,5 +24,7 @@ function generateSomeRandomNumbers() {
   ])
 }
 
+console.time('promise')
 generateSomeRandomNumbers()
   .then(console.log)
+  .then(() => console.timeEnd('promise'))
