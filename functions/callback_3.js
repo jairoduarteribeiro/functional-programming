@@ -20,3 +20,14 @@ const getTotal = product => product.amount * product.price
 
 console.log(shoppingCart.map(getName))
 console.log(shoppingCart.map(getTotal))
+
+Array.prototype.myMap = function (fn) {
+  const mapped = []
+  for (let i = 0; i < this.length; i++) {
+    mapped.push(fn(this[i], i, this))
+  }
+  return mapped
+}
+
+console.log(shoppingCart.myMap(getName))
+console.log(shoppingCart.myMap(getTotal))
