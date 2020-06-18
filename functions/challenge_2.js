@@ -8,5 +8,6 @@ const shoppingCart = [
 
 const average = shoppingCart
   .filter(product => product.fragile)
+  .map(product => product.amount * product.price)
 
 console.log(average)
