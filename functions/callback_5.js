@@ -9,8 +9,22 @@ const shoppingCart = [
 const getTotal = product => product.amount * product.price
 const sum = (accumulator, current) => accumulator + current
 
-const total = shoppingCart
+let total = shoppingCart
   .map(getTotal)
   .reduce(sum)
+
+console.log(total)
+
+Array.prototype.myReduce = function (fn, initialValue) {
+  let accumulator = initialValue
+  for (let i = 0; i < this.length; i++) {
+    accumulator = (!accumulator && i === 0) ? this[i] : fn(accumulator, this[i], i, this)
+  }
+  return accumulator
+}
+
+total = shoppingCart
+  .map(getTotal)
+  .myReduce(sum)
 
 console.log(total)
