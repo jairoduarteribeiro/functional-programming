@@ -1,5 +1,3 @@
-const { resolve } = require("path")
-
 function generateRandomNumbersBetween(min, max) {
   if (min > max) {
     [max, min] = [min, max]

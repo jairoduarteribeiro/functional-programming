@@ -1,5 +1,3 @@
-const { resolve } = require("path")
-
 const firstElement = collection => collection[0]
 const lowerCase = str => str.toLowerCase()
 
