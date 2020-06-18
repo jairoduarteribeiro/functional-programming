@@ -9,8 +9,24 @@ const shoppingCart = [
 const amountGreaterThanZero = product => product.amount > 0
 const getName = product => product.name
 
-const namesValidProducts = shoppingCart
+let namesValidProducts = shoppingCart
   .filter(amountGreaterThanZero)
+  .map(getName)
+
+console.log(namesValidProducts)
+
+Array.prototype.myFilter = function (fn) {
+  const filtered = []
+  for (let i = 0; i < this.length; i++) {
+    if (fn(this[i], i, this)) {
+      filtered.push(this[i])
+    }
+  }
+  return filtered
+}
+
+namesValidProducts = shoppingCart
+  .myFilter(amountGreaterThanZero)
   .map(getName)
 
 console.log(namesValidProducts)
