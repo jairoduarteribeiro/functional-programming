@@ -17,8 +17,12 @@ function returnValue() {
   })
 }
 
+async function returnValueQuickly() {
+  return 20 // return a promise
+}
+
 async function run() {
-  const value = await returnValue()
+  const value = await returnValueQuickly()
 
   await wait(1500)
   console.log(`Async/Await ${value}...`)
@@ -30,5 +34,9 @@ async function run() {
   return value + 3
 }
 
-run()
-  .then(console.log)
+async function showReturnWithoutThen() {
+  const value = await run()
+  console.log(value)
+}
+
+showReturnWithoutThen()
