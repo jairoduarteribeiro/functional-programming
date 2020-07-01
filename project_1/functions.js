@@ -39,9 +39,14 @@ function removeEmpty(array) {
   return array.filter(element => element.trim())
 }
 
+function removeElementWithPattern(array, pattern) {
+  return array.filter(element => !element.includes(pattern))
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
   readFiles,
-  removeEmpty
+  removeEmpty,
+  removeElementWithPattern
 }
