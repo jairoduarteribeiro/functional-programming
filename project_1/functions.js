@@ -73,6 +73,15 @@ function splitBy(text) {
   }
 }
 
+function groupWords(words) {
+  return Object.values(words.reduce((acc, word) => {
+    const lowerWord = word.toLowerCase()
+    const amount = acc[lowerWord] ? acc[lowerWord].amount + 1 : 1
+    acc[lowerWord] = { word: lowerWord, amount }
+    return acc
+  }, {}))
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
@@ -82,5 +91,6 @@ module.exports = {
   removeNumericElements,
   removeSymbols,
   merge,
-  splitBy
+  splitBy,
+  groupWords
 }
