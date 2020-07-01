@@ -2,8 +2,16 @@ const fs = require('fs')
 const path = require('path')
 
 function getFilesFromDir(dirPath) {
-  const files = fs.readdirSync(dirPath)
-  return files.map(file => path.join(dirPath, file))
+  return new Promise((resolve, reject) => {
+    try {
+      const files = fs.readdirSync(dirPath)
+      resolve(
+        files.map(file => path.join(dirPath, file))
+      )
+    } catch (exception) {
+      reject(exception)
+    }
+  })
 }
 
 module.exports = {
