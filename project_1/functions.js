@@ -57,6 +57,18 @@ function removeNumericElements(array) {
   return array.filter(element => isNaN(element))
 }
 
+function removeSymbols(symbols) {
+  return function (array) {
+    return array.map(element => {
+      let textWithoutSymbols = element
+      symbols.forEach(symbol => {
+        textWithoutSymbols = textWithoutSymbols.split(symbol).join('')
+      })
+      return textWithoutSymbols.trim()
+    })
+  }
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
@@ -64,5 +76,6 @@ module.exports = {
   groupElements,
   removeEmpty,
   removeElementWithPattern,
-  removeNumericElements
+  removeNumericElements,
+  removeSymbols
 }
