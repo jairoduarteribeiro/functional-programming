@@ -18,7 +18,25 @@ function elementsEndingWith(elements, pattern) {
   return elements.filter(element => element.endsWith(pattern))
 }
 
+function readFile(fullPath) {
+  return new Promise((resolve, reject) => {
+    try {
+      const content = fs.readFileSync(fullPath)
+      resolve(content.toString())
+    } catch (exception) {
+      reject(exception)
+    }
+  })
+}
+
+function readFiles(fullPaths) {
+  return Promise.all(
+    fullPaths.map(fullPath => readFile(fullPath))
+  )
+}
+
 module.exports = {
   getFilesFromDir,
-  elementsEndingWith
+  elementsEndingWith,
+  readFiles
 }
