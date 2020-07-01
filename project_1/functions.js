@@ -14,8 +14,10 @@ function getFilesFromDir(dirPath) {
   })
 }
 
-function elementsEndingWith(elements, pattern) {
-  return elements.filter(element => element.endsWith(pattern))
+function elementsEndingWith(pattern) {
+  return function (elements) {
+    return elements.filter(element => element.endsWith(pattern))
+  }
 }
 
 function readFile(fullPath) {
@@ -35,12 +37,20 @@ function readFiles(fullPaths) {
   )
 }
 
+function groupElements(elements) {
+  return elements
+    .join(/\r\n|\n/g)
+    .split(/\r\n|\n/g)
+}
+
 function removeEmpty(array) {
   return array.filter(element => element.trim())
 }
 
-function removeElementWithPattern(array, pattern) {
-  return array.filter(element => !element.includes(pattern))
+function removeElementWithPattern(pattern) {
+  return function (array) {
+    return array.filter(element => !element.includes(pattern))
+  }
 }
 
 function removeNumericElements(array) {
@@ -51,6 +61,7 @@ module.exports = {
   getFilesFromDir,
   elementsEndingWith,
   readFiles,
+  groupElements,
   removeEmpty,
   removeElementWithPattern,
   removeNumericElements
