@@ -37,12 +37,6 @@ function readFiles(fullPaths) {
   )
 }
 
-function groupElements(elements) {
-  return elements
-    .join(/\r\n|\n/g)
-    .split(/\r\n|\n/g)
-}
-
 function removeEmpty(array) {
   return array.filter(element => element.trim())
 }
@@ -69,13 +63,24 @@ function removeSymbols(symbols) {
   }
 }
 
+function merge(elements) {
+  return elements.join(' ')
+}
+
+function splitBy(text) {
+  return function (elements) {
+    return elements.split(text)
+  }
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
   readFiles,
-  groupElements,
   removeEmpty,
   removeElementWithPattern,
   removeNumericElements,
-  removeSymbols
+  removeSymbols,
+  merge,
+  splitBy
 }
