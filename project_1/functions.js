@@ -82,6 +82,15 @@ function groupWords(words) {
   }, {}))
 }
 
+function sortBy(attr, order = 'asc') {
+  return function (elements) {
+    const sortFn = (el1, el2) => order === 'asc'
+      ? el1[attr] - el2[attr]
+      : el2[attr] - el1[attr]
+    return elements.sort(sortFn)
+  }
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
@@ -92,5 +101,6 @@ module.exports = {
   removeSymbols,
   merge,
   splitBy,
-  groupWords
+  groupWords,
+  sortBy
 }
