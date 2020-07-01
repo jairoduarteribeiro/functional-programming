@@ -43,10 +43,15 @@ function removeElementWithPattern(array, pattern) {
   return array.filter(element => !element.includes(pattern))
 }
 
+function removeNumericElements(array) {
+  return array.filter(element => isNaN(element))
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
   readFiles,
   removeEmpty,
-  removeElementWithPattern
+  removeElementWithPattern,
+  removeNumericElements
 }
