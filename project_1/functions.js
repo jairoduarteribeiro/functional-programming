@@ -35,8 +35,13 @@ function readFiles(fullPaths) {
   )
 }
 
+function removeEmpty(array) {
+  return array.filter(element => element.trim())
+}
+
 module.exports = {
   getFilesFromDir,
   elementsEndingWith,
-  readFiles
+  readFiles,
+  removeEmpty
 }
