@@ -54,11 +54,9 @@ function removeNumericElements(array) {
 function removeSymbols(symbols) {
   return function (array) {
     return array.map(element => {
-      let textWithoutSymbols = element
-      symbols.forEach(symbol => {
-        textWithoutSymbols = textWithoutSymbols.split(symbol).join('')
-      })
-      return textWithoutSymbols.trim()
+      return symbols.reduce((acc, symbol) => {
+        return acc.split(symbol).join('')
+      }, element)
     })
   }
 }
