@@ -14,6 +14,11 @@ function getFilesFromDir(dirPath) {
   })
 }
 
+function elementsEndingWith(elements, pattern) {
+  return elements.filter(element => element.endsWith(pattern))
+}
+
 module.exports = {
-  getFilesFromDir
+  getFilesFromDir,
+  elementsEndingWith
 }
