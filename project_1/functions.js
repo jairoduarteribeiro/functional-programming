@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-function getFilesFromDir(dirPath) {
+function readDir(dirPath) {
   return new Promise((resolve, reject) => {
     try {
       const files = fs.readdirSync(dirPath)
@@ -90,7 +90,7 @@ function sortBy(attr, order = 'asc') {
 }
 
 module.exports = {
-  getFilesFromDir,
+  readDir,
   elementsEndingWith,
   readFiles,
   removeEmpty,
