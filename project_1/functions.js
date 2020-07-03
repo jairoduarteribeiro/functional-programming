@@ -14,9 +14,9 @@ function readDir(dirPath) {
   })
 }
 
-function elementsEndingWith(pattern) {
-  return function (elements) {
-    return elements.filter(element => element.endsWith(pattern))
+function filesEndingWith(extension) {
+  return function (files) {
+    return files.filter(file => file.endsWith(extension))
   }
 }
 
@@ -91,7 +91,7 @@ function sortBy(attr, order = 'asc') {
 
 module.exports = {
   readDir,
-  elementsEndingWith,
+  filesEndingWith,
   readFiles,
   removeEmpty,
   removeElementWithPattern,
