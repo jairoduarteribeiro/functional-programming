@@ -89,20 +89,22 @@ function splitBy(text) {
 }
 
 function groupWords(words) {
-  return Object.values(words.reduce((acc, word) => {
+  return Object.values(words.reduce((accumulator, word) => {
     const lowerWord = word.toLowerCase()
-    const amount = acc[lowerWord] ? acc[lowerWord].amount + 1 : 1
-    acc[lowerWord] = { word: lowerWord, amount }
-    return acc
+    const amount = accumulator[lowerWord]
+      ? accumulator[lowerWord].amount + 1
+      : 1
+    accumulator[lowerWord] = { word: lowerWord, amount }
+    return accumulator
   }, {}))
 }
 
-function sortBy(attr, order = 'asc') {
+function sortBy(attribute, order = 'asc') {
   return function (elements) {
-    const sortFn = (el1, el2) => order === 'asc'
-      ? el1[attr] - el2[attr]
-      : el2[attr] - el1[attr]
-    return elements.sort(sortFn)
+    const sortFn = (element1, element2) => order === 'asc'
+      ? element1[attribute] - element2[attribute]
+      : element2[attribute] - element1[attribute]
+    return [...elements].sort(sortFn) // pure function
   }
 }
 
