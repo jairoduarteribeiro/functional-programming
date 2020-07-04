@@ -37,6 +37,19 @@ function readFiles(fullPaths) {
   )
 }
 
+function writeFile(filename) {
+  return function (content) {
+    return new Promise((resolve, reject) => {
+      try {
+        fs.writeFileSync(filename, content)
+        resolve(`Result saved in file ${filename}`)
+      } catch (exception) {
+        reject(exception)
+      }
+    })
+  }
+}
+
 function removeEmpty(elements) {
   return elements.filter(element => element.trim())
 }
@@ -93,6 +106,7 @@ module.exports = {
   readDir,
   endingWith,
   readFiles,
+  writeFile,
   removeEmpty,
   removeElementsWithPattern,
   removeNumericElements,
