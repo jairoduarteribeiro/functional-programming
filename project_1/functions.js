@@ -41,9 +41,9 @@ function removeEmpty(elements) {
   return elements.filter(element => element.trim())
 }
 
-function removeElementWithPattern(pattern) {
-  return function (array) {
-    return array.filter(element => !element.includes(pattern))
+function removeElementsWithPattern(pattern) {
+  return function (elements) {
+    return elements.filter(element => !element.includes(pattern))
   }
 }
 
@@ -94,7 +94,7 @@ module.exports = {
   endingWith,
   readFiles,
   removeEmpty,
-  removeElementWithPattern,
+  removeElementsWithPattern,
   removeNumericElements,
   removeSymbols,
   merge,
