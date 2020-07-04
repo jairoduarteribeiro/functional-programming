@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-function getFilesFromDir(dirPath) {
+function readDir(dirPath) {
   return new Promise((resolve, reject) => {
     try {
       const files = fs.readdirSync(dirPath)
@@ -14,7 +14,7 @@ function getFilesFromDir(dirPath) {
   })
 }
 
-function elementsEndingWith(pattern) {
+function endingWith(pattern) {
   return function (elements) {
     return elements.filter(element => element.endsWith(pattern))
   }
@@ -37,28 +37,45 @@ function readFiles(fullPaths) {
   )
 }
 
-function removeEmpty(array) {
-  return array.filter(element => element.trim())
-}
-
-function removeElementWithPattern(pattern) {
-  return function (array) {
-    return array.filter(element => !element.includes(pattern))
+function writeFile(filename) {
+  return function (content) {
+    return new Promise((resolve, reject) => {
+      try {
+        fs.writeFileSync(filename, content)
+        resolve(`Result saved in file ${filename}`)
+      } catch (exception) {
+        reject(exception)
+      }
+    })
   }
 }
 
-function removeNumericElements(array) {
-  return array.filter(element => isNaN(element))
+function removeEmpty(elements) {
+  return elements.filter(element => element.trim())
+}
+
+function removeElementsWithPattern(pattern) {
+  return function (elements) {
+    return elements.filter(element => !element.includes(pattern))
+  }
+}
+
+function removeNumericElements(elements) {
+  return elements.filter(element => isNaN(element))
 }
 
 function removeSymbols(symbols) {
-  return function (array) {
-    return array.map(element => {
-      return symbols.reduce((acc, symbol) => {
-        return acc.split(symbol).join('')
+  return function (elements) {
+    return elements.map(element => {
+      return symbols.reduce((accumulator, symbol) => {
+        return accumulator.split(symbol).join('')
       }, element)
     })
   }
+}
+
+function removeTags(elements) {
+  return elements.map(element => element.split(/<.+?>/ig).join(''))
 }
 
 function merge(elements) {
@@ -72,31 +89,35 @@ function splitBy(text) {
 }
 
 function groupWords(words) {
-  return Object.values(words.reduce((acc, word) => {
+  return Object.values(words.reduce((accumulator, word) => {
     const lowerWord = word.toLowerCase()
-    const amount = acc[lowerWord] ? acc[lowerWord].amount + 1 : 1
-    acc[lowerWord] = { word: lowerWord, amount }
-    return acc
+    const amount = accumulator[lowerWord]
+      ? accumulator[lowerWord].amount + 1
+      : 1
+    accumulator[lowerWord] = { word: lowerWord, amount }
+    return accumulator
   }, {}))
 }
 
-function sortBy(attr, order = 'asc') {
+function sortBy(attribute, order = 'asc') {
   return function (elements) {
-    const sortFn = (el1, el2) => order === 'asc'
-      ? el1[attr] - el2[attr]
-      : el2[attr] - el1[attr]
-    return elements.sort(sortFn)
+    const sortFn = (element1, element2) => order === 'asc'
+      ? element1[attribute] - element2[attribute]
+      : element2[attribute] - element1[attribute]
+    return [...elements].sort(sortFn) // pure function
   }
 }
 
 module.exports = {
-  getFilesFromDir,
-  elementsEndingWith,
+  readDir,
+  endingWith,
   readFiles,
+  writeFile,
   removeEmpty,
-  removeElementWithPattern,
+  removeElementsWithPattern,
   removeNumericElements,
   removeSymbols,
+  removeTags,
   merge,
   splitBy,
   groupWords,
