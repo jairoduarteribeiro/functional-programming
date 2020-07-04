@@ -47,8 +47,8 @@ function removeElementsWithPattern(pattern) {
   }
 }
 
-function removeNumericElements(array) {
-  return array.filter(element => isNaN(element))
+function removeNumericElements(elements) {
+  return elements.filter(element => isNaN(element))
 }
 
 function removeSymbols(symbols) {
