@@ -65,13 +65,17 @@ function removeNumericElements(elements) {
 }
 
 function removeSymbols(symbols) {
-  return function (array) {
-    return array.map(element => {
-      return symbols.reduce((acc, symbol) => {
-        return acc.split(symbol).join('')
+  return function (elements) {
+    return elements.map(element => {
+      return symbols.reduce((accumulator, symbol) => {
+        return accumulator.split(symbol).join('')
       }, element)
     })
   }
+}
+
+function removeTags(elements) {
+  return elements.map(element => element.split(/<.+?>/ig).join(''))
 }
 
 function merge(elements) {
@@ -111,6 +115,7 @@ module.exports = {
   removeElementsWithPattern,
   removeNumericElements,
   removeSymbols,
+  removeTags,
   merge,
   splitBy,
   groupWords,

@@ -4,7 +4,7 @@ const { fstat } = require('fs')
 
 const subtitlesPath = path.join(__dirname, '..', 'data', 'subtitles')
 const resultFilename = path.join(__dirname, 'result.txt')
-const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '<i>', '</i>', '\r', '[', ']', '(', ')']
+const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
 
 fn.readDir(subtitlesPath)
   .then(fn.endingWith('.srt'))
@@ -14,6 +14,8 @@ fn.readDir(subtitlesPath)
   .then(fn.removeEmpty)
   .then(fn.removeElementsWithPattern('-->'))
   .then(fn.removeNumericElements)
+  .then(fn.removeSymbols(symbols))
+  .then(fn.removeTags)
   .then(fn.writeFile(resultFilename))
   .then(console.log)
   .catch(console.error)
