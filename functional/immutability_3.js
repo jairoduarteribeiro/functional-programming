@@ -1,11 +1,11 @@
-const person = {
+const person = Object.freeze({
   name: 'Maria',
   height: 1.76,
   city: 'São Paulo',
-  address: {
+  address: Object.freeze({
     street: 'ABC'
-  }
-}
+  })
+})
 
 function changeInformation(person) {
   const newPerson = { ...person }
