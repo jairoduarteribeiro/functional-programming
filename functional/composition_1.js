@@ -18,8 +18,16 @@ function makeLarge(text) {
   return text.split('').join(' ')
 }
 
-const result = composition(
+const dangerous = composition(
   scream, emphasize, makeLarge
-)('stop')
+)
 
-console.log(result)
+const warning = composition(
+  scream, emphasize
+)
+
+const result1 = dangerous('stop')
+const result2 = warning('take care')
+
+console.log(result1)
+console.log(result2)
