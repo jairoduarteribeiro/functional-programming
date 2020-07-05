@@ -5,3 +5,6 @@ function sort(array) {
 const numbers = [3, 1, 7, 9, 4, 6]
 const orderedNumbers = sort(numbers)
 console.log(numbers, orderedNumbers)
+
+const slice = numbers.slice(1)
+console.log(numbers, slice)
