@@ -108,7 +108,18 @@ function sortBy(attribute, order = 'asc') {
   }
 }
 
+function composition(...fns) {
+  return function (value) {
+    return fns.reduce(async (accumulator, fn) => {
+      return Promise.resolve(accumulator) === accumulator
+        ? fn(await accumulator)
+        : fn(accumulator)
+    }, value)
+  }
+}
+
 module.exports = {
+  composition,
   readDir,
   endingWith,
   readFiles,
