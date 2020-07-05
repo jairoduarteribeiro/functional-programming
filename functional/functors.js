@@ -8,15 +8,18 @@ console.log(numbers, newNumbers)
 function SafeType(value) {
   return {
     value,
+    invalid() {
+      return this.value === null || this.value === undefined
+    },
     map(fn) {
-      return SafeType(fn(value))
+      return this.invalid() ? SafeType(null) : SafeType(fn(value))
     }
   }
 }
 
 const result = SafeType('This is a text')
   .map(text => text.toUpperCase())
-  .map(text => `${text}!!!`)
+  .map(text => null)
   .map(text => text.split('').join(' '))
 
 console.log(result.value)
