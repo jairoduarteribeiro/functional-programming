@@ -13,13 +13,16 @@ function SafeType(value) {
     },
     map(fn) {
       return this.invalid() ? SafeType(null) : SafeType(fn(value))
+    },
+    flatMap(fn) {
+      return this.map(fn).value
     }
   }
 }
 
 const result = SafeType('This is a text')
   .map(text => text.toUpperCase())
-  .map(text => null)
-  .map(text => text.split('').join(' '))
+  .map(text => `${text}!!!`)
+  .flatMap(text => text.split('').join(' '))
 
-console.log(result.value)
+console.log(result)
