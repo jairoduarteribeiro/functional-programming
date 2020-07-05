@@ -11,5 +11,8 @@ function lengthBetween(min) {
   }
 }
 
+const validLength = lengthBetween(4)(255)
+const validProductName = validLength('Invalid name')
+
 const p1 = { name: 'A', price: 14.99, discount: 0.25 }
-lengthBetween(4)(255)('Invalid name')(p1.name)
+validProductName(p1.name)
