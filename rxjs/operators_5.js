@@ -5,7 +5,9 @@ function endingWith(text) {
     return new Observable(subscriber => {
       source.subscribe({
         next(value) {
-          if (value.endsWith(text)) {
+          if (Array.isArray(value)) {
+            subscriber.next(value.filter(element => element.endsWith(text)))
+          } else if (value.endsWith(text)) {
             subscriber.next(value)
           }
         },
@@ -20,6 +22,6 @@ function endingWith(text) {
   }
 }
 
-of('Ana Silva', 'Maria Silva', 'Pedro Rocha')
+of(['Ana Silva', 'Maria Silva', 'Pedro Rocha'])
   .pipe(endingWith('Silva'))
   .subscribe(console.log)
