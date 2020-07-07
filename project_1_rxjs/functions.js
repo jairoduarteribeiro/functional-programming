@@ -75,13 +75,23 @@ function removeEmpty() {
 }
 
 function removeElementsWithPattern(pattern) {
-  return function (elements) {
-    return elements.filter(element => !element.includes(pattern))
-  }
+  return createPipeableOperator(subscriber => ({
+    next(element) {
+      if (!element.includes(pattern)) {
+        subscriber.next(element)
+      }
+    }
+  }))
 }
 
 function removeNumericElements(elements) {
-  return elements.filter(element => isNaN(element))
+  return createPipeableOperator(subscriber => ({
+    next(element) {
+      if (isNaN(element)) {
+        subscriber.next(element)
+      }
+    }
+  }))
 }
 
 function removeSymbols(symbols) {
