@@ -114,10 +114,6 @@ function removeTags() {
   }))
 }
 
-function merge(elements) {
-  return elements.join(' ')
-}
-
 function splitBy(symbol) {
   return createPipeableOperator(subscriber => ({
     next(element) {
@@ -145,15 +141,6 @@ function groupWords() {
   }))
 }
 
-function sortBy(attribute, order = 'asc') {
-  return function (elements) {
-    const sortFn = (element1, element2) => order === 'asc'
-      ? element1[attribute] - element2[attribute]
-      : element2[attribute] - element1[attribute]
-    return [...elements].sort(sortFn) // pure function
-  }
-}
-
 module.exports = {
   readDir,
   endingWith,
@@ -164,8 +151,6 @@ module.exports = {
   removeNumericElements,
   removeSymbols,
   removeTags,
-  merge,
   splitBy,
-  groupWords,
-  sortBy
+  groupWords
 }
