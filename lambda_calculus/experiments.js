@@ -28,3 +28,8 @@ F.toString = () => 'False'
 
 T.log()
 F.log()
+
+const NOT = a => a(F)(T)
+
+NOT(T).log()
+NOT(F).log()
