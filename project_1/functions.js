@@ -68,14 +68,14 @@ function removeSymbols(symbols) {
   return function (elements) {
     return elements.map(element => {
       return symbols.reduce((accumulator, symbol) => {
-        return accumulator.split(symbol).join('')
+        return accumulator.split(symbol).join(' ')
       }, element)
     })
   }
 }
 
 function removeTags(elements) {
-  return elements.map(element => element.split(/<.+?>/ig).join(''))
+  return elements.map(element => element.split(/<.+?>/ig).join(' '))
 }
 
 function merge(elements) {
