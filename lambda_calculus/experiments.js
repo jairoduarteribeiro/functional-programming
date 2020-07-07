@@ -15,3 +15,8 @@ const LAST = _ => b => b
 
 FIRST(3)(7).log()
 LAST(3)(7).log()
+
+const SWAP = f => a => b => f(b)(a)
+
+// LAST with FIRST and SWAP
+SWAP(FIRST)(3)(7).log()
