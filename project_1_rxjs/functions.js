@@ -96,10 +96,14 @@ function merge(elements) {
   return elements.join(' ')
 }
 
-function splitBy(text) {
-  return function (elements) {
-    return elements.split(text)
-  }
+function splitBy(symbol) {
+  return createPipeableOperator(subscriber => ({
+    next(element) {
+      element.split(symbol).forEach(part => {
+        subscriber.next(part)
+      })
+    }
+  }))
 }
 
 function groupWords(words) {
