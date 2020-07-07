@@ -33,3 +33,10 @@ const NOT = a => a(F)(T)
 
 NOT(T).log()
 NOT(F).log()
+
+const AND = a => b => a(b)(F)
+
+AND(T)(T).log()
+AND(T)(F).log()
+AND(F)(T).log()
+AND(F)(F).log()
