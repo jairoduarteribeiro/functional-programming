@@ -64,8 +64,14 @@ function writeFile(filename) {
   }
 }
 
-function removeEmpty(elements) {
-  return elements.filter(element => element.trim())
+function removeEmpty() {
+  return createPipeableOperator(subscriber => ({
+    next(element) {
+      if (element.trim()) {
+        subscriber.next(element)
+      }
+    }
+  }))
 }
 
 function removeElementsWithPattern(pattern) {

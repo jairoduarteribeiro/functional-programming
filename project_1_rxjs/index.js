@@ -9,10 +9,10 @@ fn.readDir(subtitlesPath)
   .pipe(
     fn.endingWith('.srt'),
     fn.readFile(),
-    fn.splitBy(/\r\n|\n/g)
+    fn.splitBy(/\r\n|\n/g),
+    fn.removeEmpty()
   )
   //   .then(fn.merge)
-  //   .then(fn.removeEmpty)
   //   .then(fn.removeElementsWithPattern('-->'))
   //   .then(fn.removeNumericElements)
   //   .then(fn.removeSymbols(symbols))
