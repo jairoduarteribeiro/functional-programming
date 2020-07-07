@@ -3,7 +3,7 @@ const fn = require('./functions')
 
 const subtitlesPath = path.join(__dirname, '..', 'data', 'subtitles')
 const resultFilename = path.join(__dirname, 'result.txt')
-const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
+const symbols = ['.', '?', '!', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
 
 fn.readDir(subtitlesPath)
   .then(fn.endingWith('.srt'))

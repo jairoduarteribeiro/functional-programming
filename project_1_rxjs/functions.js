@@ -95,13 +95,15 @@ function removeNumericElements(elements) {
 }
 
 function removeSymbols(symbols) {
-  return function (elements) {
-    return elements.map(element => {
-      return symbols.reduce((accumulator, symbol) => {
-        return accumulator.split(symbol).join('')
-      }, element)
-    })
-  }
+  return createPipeableOperator(subscriber => ({
+    next(element) {
+      subscriber.next(
+        symbols.reduce((accumulator, symbol) => {
+          return accumulator.split(symbol).join('')
+        }, element)
+      )
+    }
+  }))
 }
 
 function removeTags(elements) {

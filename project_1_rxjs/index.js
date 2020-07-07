@@ -3,7 +3,7 @@ const fn = require('./functions')
 
 const subtitlesPath = path.join(__dirname, '..', 'data', 'subtitles')
 const resultFilename = path.join(__dirname, 'result.txt')
-const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
+const symbols = ['.', '?', '!', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
 
 fn.readDir(subtitlesPath)
   .pipe(
@@ -12,10 +12,10 @@ fn.readDir(subtitlesPath)
     fn.splitBy(/\r\n|\n/g),
     fn.removeEmpty(),
     fn.removeElementsWithPattern('-->'),
-    fn.removeNumericElements()
+    fn.removeNumericElements(),
+    fn.removeSymbols(symbols)
   )
   //   .then(fn.merge)
-  //   .then(fn.removeSymbols(symbols))
   //   .then(fn.removeTags)
   //   .then(fn.merge)
   //   .then(fn.splitBy(' '))
