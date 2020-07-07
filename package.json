@@ -1,0 +1,24 @@
+{
+  "name": "functional-programming",
+  "version": "1.0.0",
+  "description": "Repository of the Functional Programming course by COD3R Cursos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jairoribeiro167/functional-programming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jairoribeiro167/functional-programming/issues"
+  },
+  "homepage": "https://github.com/jairoribeiro167/functional-programming#readme",
+  "dependencies": {
+    "rxjs": "^6.6.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
