@@ -6,7 +6,9 @@ const resultFilename = path.join(__dirname, 'result.txt')
 const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
 
 fn.readDir(subtitlesPath)
-  //   .then(fn.endingWith('.srt'))
+  .pipe(
+    fn.endingWith('.srt')
+  )
   //   .then(fn.readFiles)
   //   .then(fn.merge)
   //   .then(fn.splitBy(/\r\n|\n/g))
