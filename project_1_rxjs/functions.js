@@ -124,23 +124,6 @@ function splitBy(symbol) {
   }))
 }
 
-function groupWords() {
-  return createPipeableOperator(subscriber => ({
-    next(words) {
-      subscriber.next(
-        Object.values(words.reduce((accumulator, word) => {
-          const lowerWord = word.toLowerCase()
-          const amount = accumulator[lowerWord]
-            ? accumulator[lowerWord].amount + 1
-            : 1
-          accumulator[lowerWord] = { word: lowerWord, amount }
-          return accumulator
-        }, {}))
-      )
-    }
-  }))
-}
-
 module.exports = {
   readDir,
   endingWith,
@@ -151,6 +134,5 @@ module.exports = {
   removeNumericElements,
   removeSymbols,
   removeTags,
-  splitBy,
-  groupWords
+  splitBy
 }

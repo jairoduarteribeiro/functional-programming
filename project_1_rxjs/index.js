@@ -1,7 +1,7 @@
 const path = require('path')
 const fn = require('./functions')
 const _ = require('lodash')
-const { toArray, map } = require('rxjs/operators')
+const { toArray, map, groupBy, mergeMap } = require('rxjs/operators')
 
 const subtitlesPath = path.join(__dirname, '..', 'data', 'subtitles')
 const resultFilename = path.join(__dirname, 'result.txt')
@@ -20,8 +20,13 @@ fn.readDir(subtitlesPath)
     fn.splitBy(' '),
     fn.removeEmpty(),
     fn.removeNumericElements(),
+    groupBy(element => element.toLowerCase()),
+    mergeMap(group => group.pipe(toArray())),
+    map(words => ({
+      word: words[0].toLowerCase(),
+      amount: words.length
+    })),
     toArray(),
-    fn.groupWords(),
     map(array => _.sortBy(array, element => -element.amount))
   )
   //   // .then(JSON.stringify)
