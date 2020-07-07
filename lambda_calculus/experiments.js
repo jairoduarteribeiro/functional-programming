@@ -47,3 +47,17 @@ OR(T)(T).log()
 OR(T)(F).log()
 OR(F)(T).log()
 OR(F)(F).log()
+
+const XNOR = a => b => a(b)(NOT(b))
+
+XNOR(T)(T).log()
+XNOR(T)(F).log()
+XNOR(F)(T).log()
+XNOR(F)(F).log()
+
+const XOR = a => b => NOT(XNOR(a)(b))
+
+XOR(T)(T).log()
+XOR(T)(F).log()
+XOR(F)(T).log()
+XOR(F)(F).log()
