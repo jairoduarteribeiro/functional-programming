@@ -40,3 +40,10 @@ AND(T)(T).log()
 AND(T)(F).log()
 AND(F)(T).log()
 AND(F)(F).log()
+
+const OR = a => b => a(T)(b)
+
+OR(T)(T).log()
+OR(T)(F).log()
+OR(F)(T).log()
+OR(F)(F).log()
