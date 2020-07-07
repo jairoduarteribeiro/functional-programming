@@ -1,15 +1,16 @@
 const fs = require('fs')
 const path = require('path')
+const { Observable } = require('rxjs')
 
 function readDir(dirPath) {
-  return new Promise((resolve, reject) => {
+  return new Observable(subscriber => {
     try {
-      const files = fs.readdirSync(dirPath)
-      resolve(
-        files.map(file => path.join(dirPath, file))
-      )
+      fs.readdirSync(dirPath).forEach(filename => {
+        subscriber.next(path.join(dirPath, filename))
+      })
+      subscriber.complete()
     } catch (exception) {
-      reject(exception)
+      subscriber.error(exception)
     }
   })
 }
@@ -108,18 +109,7 @@ function sortBy(attribute, order = 'asc') {
   }
 }
 
-function composition(...fns) {
-  return function (value) {
-    return fns.reduce(async (accumulator, fn) => {
-      return Promise.resolve(accumulator) === accumulator
-        ? fn(await accumulator)
-        : fn(accumulator)
-    }, value)
-  }
-}
-
 module.exports = {
-  composition,
   readDir,
   endingWith,
   readFiles,
