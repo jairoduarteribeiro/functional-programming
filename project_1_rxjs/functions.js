@@ -128,15 +128,21 @@ function splitBy(symbol) {
   }))
 }
 
-function groupWords(words) {
-  return Object.values(words.reduce((accumulator, word) => {
-    const lowerWord = word.toLowerCase()
-    const amount = accumulator[lowerWord]
-      ? accumulator[lowerWord].amount + 1
-      : 1
-    accumulator[lowerWord] = { word: lowerWord, amount }
-    return accumulator
-  }, {}))
+function groupWords() {
+  return createPipeableOperator(subscriber => ({
+    next(words) {
+      subscriber.next(
+        Object.values(words.reduce((accumulator, word) => {
+          const lowerWord = word.toLowerCase()
+          const amount = accumulator[lowerWord]
+            ? accumulator[lowerWord].amount + 1
+            : 1
+          accumulator[lowerWord] = { word: lowerWord, amount }
+          return accumulator
+        }, {}))
+      )
+    }
+  }))
 }
 
 function sortBy(attribute, order = 'asc') {

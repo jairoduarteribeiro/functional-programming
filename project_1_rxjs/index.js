@@ -1,5 +1,6 @@
 const path = require('path')
 const fn = require('./functions')
+const { toArray } = require('rxjs/operators')
 
 const subtitlesPath = path.join(__dirname, '..', 'data', 'subtitles')
 const resultFilename = path.join(__dirname, 'result.txt')
@@ -17,13 +18,12 @@ fn.readDir(subtitlesPath)
     fn.removeTags(),
     fn.splitBy(' '),
     fn.removeEmpty(),
+    fn.removeNumericElements(),
+    toArray(),
+    fn.groupWords()
   )
   //   .then(fn.merge)
   //   .then(fn.merge)
-  //   .then(fn.splitBy(' '))
-  //   .then(fn.removeEmpty)
-  //   .then(fn.removeNumericElements)
-  //   .then(fn.groupWords)
   //   .then(fn.sortBy('amount', 'desc'))
   //   // .then(JSON.stringify)
   //   // .then(fn.writeFile(resultFilename))
