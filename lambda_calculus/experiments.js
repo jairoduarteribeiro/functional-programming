@@ -20,3 +20,11 @@ const SWAP = f => a => b => f(b)(a)
 
 // LAST with FIRST and SWAP
 SWAP(FIRST)(3)(7).log()
+
+const T = FIRST
+T.toString = () => 'True'
+const F = LAST
+F.toString = () => 'False'
+
+T.log()
+F.log()
