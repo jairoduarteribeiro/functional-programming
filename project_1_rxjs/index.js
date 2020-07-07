@@ -7,9 +7,9 @@ const symbols = ['.', '?', '-', ',', '"', '♪', '_', '%', '[', ']', '(', ')']
 
 fn.readDir(subtitlesPath)
   .pipe(
-    fn.endingWith('.srt')
+    fn.endingWith('.srt'),
+    fn.readFile()
   )
-  //   .then(fn.readFiles)
   //   .then(fn.merge)
   //   .then(fn.splitBy(/\r\n|\n/g))
   //   .then(fn.removeEmpty)

@@ -38,21 +38,17 @@ function endingWith(pattern) {
   }))
 }
 
-function readFile(fullPath) {
-  return new Promise((resolve, reject) => {
-    try {
-      const content = fs.readFileSync(fullPath)
-      resolve(content.toString())
-    } catch (exception) {
-      reject(exception)
+function readFile() {
+  return createPipeableOperator(subscriber => ({
+    next(fullPath) {
+      try {
+        const content = fs.readFileSync(fullPath)
+        subscriber.next(content.toString())
+      } catch (exception) {
+        subscriber.error(exception)
+      }
     }
-  })
-}
-
-function readFiles(fullPaths) {
-  return Promise.all(
-    fullPaths.map(fullPath => readFile(fullPath))
-  )
+  }))
 }
 
 function writeFile(filename) {
@@ -129,7 +125,7 @@ function sortBy(attribute, order = 'asc') {
 module.exports = {
   readDir,
   endingWith,
-  readFiles,
+  readFile,
   writeFile,
   removeEmpty,
   removeElementsWithPattern,
